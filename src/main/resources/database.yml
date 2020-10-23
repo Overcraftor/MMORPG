@@ -1,0 +1,6 @@
+# EXEMPLE POUR UN LOCALHOST
+urlbase: jdbc:mysql://
+host: localhost
+database: mmo
+user: root
+pass:

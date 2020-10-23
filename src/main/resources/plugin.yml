@@ -1,0 +1,18 @@
+main: fr.overcraftor.mmo.Main
+name: MMORPG
+version: 1.0-SNAPSHOT
+author: Overcraftor
+database: true
+description: "Discord: Overcraftor#4841 | Plugin MMO pour le serveur Monster-MC | Commande par Azrotho fait par Overcraftor avec <3"
+api-version: 1.14
+
+commands:
+  jobs:
+    description: Commande pour voir l'avancement des metiers
+    aliases: [j, job]
+  addxpjobs:
+    description: Commande pour ajouter de l'exp a un joueur
+    aliases: addxpjob
+  setxpjobs:
+    description: Commande pour definir l'exp d'un joueur
+    aliases: setxpjob
