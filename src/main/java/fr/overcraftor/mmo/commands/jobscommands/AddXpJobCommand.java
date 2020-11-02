@@ -5,6 +5,8 @@ import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.utils.Permissions;
 import fr.overcraftor.mmo.utils.jobs.JobsXpUtils;
 import fr.overcraftor.mmo.utils.jobs.OnLevelUp;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -62,18 +64,18 @@ public class AddXpJobCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if(Main.jobsXp.get(target).get(job) + xp == 2995000){
+        final HashMap<JobsNames, Integer> map = Main.jobsXp.get(target);
+
+        if(map.get(job) >= 2995000){
             return true;
         }
 
         //COMMAND
-        final HashMap<JobsNames, Integer> map = Main.jobsXp.get(target);
-
         final JobsXpUtils jobsXpUtils = new JobsXpUtils(map.get(job));
         new OnLevelUp(target, job, jobsXpUtils.checkLevelUp(xp));
 
         Main.jobsXp.get(target).put(job, map.get(job) + xp);
-        sender.sendMessage(ChatColor.GREEN + "Vous avez ajouté " + xp + " au metier " + job.toName() + " du joueur " + target.getName() + " !");
+        target.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§e+§6[§e" + xp + "XP§6] §e" + job.toName()));
 
         return true;
     }

@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 
 import java.util.HashMap;
 
@@ -30,35 +31,39 @@ public class JobInventory{
         final JobsXpUtils enchanter = new JobsXpUtils(map.get(JobsNames.ENCHANTER));
         final JobsXpUtils farmer = new JobsXpUtils(map.get(JobsNames.FARMER));
 
+        // INSTANCE ITEMS
         ItemBuilder wood_cutterBuilder =  new ItemBuilder(Material.DIAMOND_AXE, "§6" + JobsNames.WOOD_CUTTER.toName())
-                .setLore("§eNiveau: §6" + wood_cutter.getLevels(), "", "§eXP: §6" + wood_cutter.getXpRemain() + "/" + JobsLevel.getFromLevel(wood_cutter.getLevels()).getObjective());
+                .setLore("§eNiveau: §6" + wood_cutter.getLevels(), "", "§eXP: §6" + wood_cutter.getXpRemain() + "/" + JobsLevel.getFromLevel(wood_cutter.getLevels()).getObjective())
+                .addFlag(ItemFlag.HIDE_ATTRIBUTES);
 
         ItemBuilder blacksmithBuilder =  new ItemBuilder(Material.ANVIL, "§6" + JobsNames.BLACKSMITH.toName())
-                .setLore("§eNiveau: §6" + blacksmith.getLevels(), "", "§eXP: §6" + blacksmith.getXpRemain() + "/" + JobsLevel.getFromLevel(blacksmith.getLevels()).getObjective());
+                .setLore("§eNiveau: §6" + blacksmith.getLevels(), "", "§eXP: §6" + blacksmith.getXpRemain() + "/" + JobsLevel.getFromLevel(blacksmith.getLevels()).getObjective())
+                .addFlag(ItemFlag.HIDE_ATTRIBUTES);
 
         ItemBuilder minerBuilder =  new ItemBuilder(Material.DIAMOND_PICKAXE, "§6" + JobsNames.MINER.toName())
-                .setLore("§eNiveau: §6" + miner.getLevels(), "", "§eXP: §6" + miner.getXpRemain() + "/" + JobsLevel.getFromLevel(miner.getLevels()).getObjective());
+                .setLore("§eNiveau: §6" + miner.getLevels(), "", "§eXP: §6" + miner.getXpRemain() + "/" + JobsLevel.getFromLevel(miner.getLevels()).getObjective())
+                .addFlag(ItemFlag.HIDE_ATTRIBUTES);
 
         ItemBuilder enchanterBuilder =  new ItemBuilder(Material.ENCHANTING_TABLE, "§6" + JobsNames.ENCHANTER.toName())
-                .setLore("§eNiveau: §6" + enchanter.getLevels(), "", "§eXP: §6" + enchanter.getXpRemain() + "/" + JobsLevel.getFromLevel(enchanter.getLevels()).getObjective());
+                .setLore("§eNiveau: §6" + enchanter.getLevels(), "", "§eXP: §6" + enchanter.getXpRemain() + "/" + JobsLevel.getFromLevel(enchanter.getLevels()).getObjective())
+                .addFlag(ItemFlag.HIDE_ATTRIBUTES);
 
         ItemBuilder farmerBuilder =  new ItemBuilder(Material.DIAMOND_HOE, "§6" + JobsNames.FARMER.toName())
-                .setLore("§eNiveau: §6" + farmer.getLevels(), "", "§eXP: §6" + farmer.getXpRemain() + "/" + JobsLevel.getFromLevel(farmer.getLevels()).getObjective());
+                .setLore("§eNiveau: §6" + farmer.getLevels(), "", "§eXP: §6" + farmer.getXpRemain() + "/" + JobsLevel.getFromLevel(farmer.getLevels()).getObjective())
+                .addFlag(ItemFlag.HIDE_ATTRIBUTES);
 
+        // GLOWING LEVEL 10
         if(wood_cutter.getLevels() == 10) wood_cutterBuilder = wood_cutterBuilder.setGlow();
         if(blacksmith.getLevels() == 10) blacksmithBuilder = blacksmithBuilder.setGlow();
         if(miner.getLevels() == 10) minerBuilder = minerBuilder.setGlow();
         if(enchanter.getLevels() == 10) enchanterBuilder = enchanterBuilder.setGlow();
         if(farmer.getLevels() == 10) farmerBuilder = farmerBuilder.setGlow();
 
+        // ADD ITEMS
         inventory.setItem(11, wood_cutterBuilder.toItemStack());
-
         inventory.setItem(12, blacksmithBuilder.toItemStack());
-
         inventory.setItem(13, minerBuilder.toItemStack());
-
         inventory.setItem(14, enchanterBuilder.toItemStack());
-
         inventory.setItem(15, farmerBuilder.toItemStack());
 
         p.openInventory(inv);

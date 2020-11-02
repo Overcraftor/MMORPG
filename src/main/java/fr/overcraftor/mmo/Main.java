@@ -1,16 +1,20 @@
 package fr.overcraftor.mmo;
 
+import fr.overcraftor.mmo.commands.guildcommands.GManagerCommand;
 import fr.overcraftor.mmo.commands.jobscommands.AddXpJobCommand;
 import fr.overcraftor.mmo.commands.jobscommands.JobCommand;
 import fr.overcraftor.mmo.commands.jobscommands.SetXpJobCommand;
+import fr.overcraftor.mmo.events.GuildEvents;
 import fr.overcraftor.mmo.events.OnInventoryClick;
 import fr.overcraftor.mmo.events.OnBlockBreak;
 import fr.overcraftor.mmo.events.PlayerJoin;
+import fr.overcraftor.mmo.mysql.GuildSQL;
 import fr.overcraftor.mmo.mysql.JobsSQL;
 import fr.overcraftor.mmo.mysql.SQLConnection;
 import fr.overcraftor.mmo.config.ConfigManager;
 import fr.overcraftor.mmo.config.ConfigurationAPI;
 import fr.overcraftor.mmo.timers.JobXpTimer;
+import fr.overcraftor.mmo.utils.guilds.Guild;
 import fr.overcraftor.mmo.utils.jobs.JobsNames;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -39,6 +43,8 @@ public class Main extends JavaPlugin {
         getLogger().info("Chargement de la bdd mysql...");
         if(dataConnection()){
             JobsSQL.createTable(this);
+            GuildSQL.createTable();
+
             getLogger().info("MYSQL: Correctement initialise");
             registration();
 
@@ -76,6 +82,7 @@ public class Main extends JavaPlugin {
             return true;
         } catch (SQLException ignored) {
             getLogger().warning("La connection MYSQL a echoue, les fonctionnalites du plugin sont desactivees");
+            Bukkit.getPluginManager().disablePlugin(this);
         }
         return false;
     }
@@ -85,16 +92,21 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnBlockBreak(), this);
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new OnInventoryClick(), this);
+        getServer().getPluginManager().registerEvents(new GuildEvents(), this);
 
         //commands
         getCommand("jobs").setExecutor(new JobCommand());
         getCommand("addxpjobs").setExecutor(new AddXpJobCommand());
         getCommand("setxpjobs").setExecutor(new SetXpJobCommand());
 
+        getCommand("guild").setExecutor(new GManagerCommand());
+
         //table completer
         getCommand("jobs").setTabCompleter(new JobCommand());
         getCommand("addxpjobs").setTabCompleter(new AddXpJobCommand());
         getCommand("setxpjobs").setTabCompleter(new SetXpJobCommand());
+
+        getCommand("guild").setTabCompleter(new GManagerCommand());
     }
 
     //GETTERS
