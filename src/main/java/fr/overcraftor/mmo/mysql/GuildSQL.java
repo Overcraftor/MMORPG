@@ -2,7 +2,6 @@ package fr.overcraftor.mmo.mysql;
 
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.utils.guilds.Guild;
-import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

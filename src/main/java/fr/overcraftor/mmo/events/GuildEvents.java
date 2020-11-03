@@ -21,7 +21,7 @@ public class GuildEvents implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e){
-        if(!(e.getDamager() instanceof Player && e.getEntity() instanceof Player)){
+        if(e.getDamager() instanceof Player && e.getEntity() instanceof Player){
             if(GuildSQL.areInSameGuild(e.getDamager().getUniqueId(), e.getEntity().getUniqueId()))
                 e.setCancelled(true);
         }
