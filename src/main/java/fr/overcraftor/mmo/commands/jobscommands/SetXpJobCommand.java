@@ -46,8 +46,8 @@ public class SetXpJobCommand implements CommandExecutor, TabCompleter {
         try {
             xp = Integer.parseInt(args[1]);
 
-            if(xp <= 0 || xp > 2995000){
-                sender.sendMessage(ChatColor.RED + "Veuillez indiquer un nombre superieur à 0 et inferieur à 2 995 000");
+            if(xp < 0 || xp > 2995000){
+                sender.sendMessage(ChatColor.RED + "Veuillez indiquer un nombre superieur ou egale a 0 et inferieur à 2 995 000");
                 return true;
             }
         }catch (NumberFormatException ignored){

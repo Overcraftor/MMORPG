@@ -1,5 +1,6 @@
 package fr.overcraftor.mmo.events;
 
+import fr.overcraftor.mmo.mysql.GeneralXpSQL;
 import fr.overcraftor.mmo.utils.jobs.JobsNames;
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.JobsSQL;
@@ -16,10 +17,20 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         final Player p = e.getPlayer();
+
+        //JOBS XP
         JobsSQL.checkTableContainUUID(p.getUniqueId());
         final HashMap<JobsNames, Integer> map = JobsSQL.getXp(p.getUniqueId());
-
         Main.jobsXp.put(p, map);
+
+        //GENERAL XP
+        if(GeneralXpSQL.isInTable(p.getUniqueId())){
+            final int xp =  GeneralXpSQL.getXp(p.getUniqueId());
+            Main.getInstance().generalXp.put(p, xp);
+        }else{
+            GeneralXpSQL.insert(p.getUniqueId(), 0);
+            Main.getInstance().generalXp.put(p, 0);
+        }
     }
 
     @EventHandler
@@ -27,7 +38,11 @@ public class PlayerJoin implements Listener {
         final Player p = e.getPlayer();
 
         JobsSQL.setAllXp(Main.jobsXp.get(p), p.getUniqueId());
-        Main.getInstance().getLogger().info("l'xp du joueur " + p.getName() + " a bien ete sauvegarde sur MYSQL");
         Main.jobsXp.remove(p);
+        Main.getInstance().getLogger().info("L'xp des jobs du joueur " + p.getName() + " a bien ete sauvegarde sur MYSQL");
+
+        GeneralXpSQL.setXp(p.getUniqueId(), Main.getInstance().generalXp.get(p));
+        Main.getInstance().generalXp.remove(p);
+        Main.getInstance().getLogger().info("L'xp general du joueur " + p.getName() + " a bien ete sauvegarde sur MYSQL");
     }
 }

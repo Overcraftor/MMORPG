@@ -9,15 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class GuildEvents implements Listener {
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onChat(AsyncPlayerChatEvent e){
-        final String tag = GuildSQL.getGuildTag(e.getPlayer().getUniqueId());
-        final String format = (tag == null ? "" : "§b[§f"+tag+"§b] ") + "%luckperms_prefix% " + e.getPlayer().getName() + " %luckperms_suffix% " + e.getMessage();
-        final String formatWithPlaceHolders = PlaceholderAPI.setPlaceholders(e.getPlayer(), format);
-        e.setFormat(formatWithPlaceHolders);
-    }
+public class OnDamage implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e){

@@ -62,7 +62,7 @@ public class JobCommand implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
         final List<String> list = new ArrayList<>();
 
-        if(args.length == 1){
+        if(args.length == 1 && Permissions.JOB_VIEW_OTHER.hasPerm(sender)){
             for(Player p : Bukkit.getOnlinePlayers()){
                 list.add(p.getName());
             }

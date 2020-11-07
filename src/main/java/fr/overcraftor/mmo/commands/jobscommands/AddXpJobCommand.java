@@ -50,6 +50,9 @@ public class AddXpJobCommand implements CommandExecutor, TabCompleter {
         try {
             xp = Integer.parseInt(args[1]);
 
+            //+15% si le joueur est premium
+            if(Permissions.PREMIUM.hasPerm(target)) xp *= 1.15;
+
             if(xp <= 0){
                 sender.sendMessage(ChatColor.RED + "Le nombre doit etre superieur a 0");
                 return true;

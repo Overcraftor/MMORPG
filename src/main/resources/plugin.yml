@@ -1,6 +1,6 @@
 main: fr.overcraftor.mmo.Main
 name: MMORPG
-version: 1.1
+version: 1.2 #1.0 jobs; 1.1 guilds; 1.2 general xp
 author: Overcraftor
 database: true
 description: "Discord: Overcraftor#4841 | Plugin MMO pour le serveur Monster-MC | Commande par Azrotho fait par Overcraftor avec <3"
@@ -10,16 +10,22 @@ depend: [PlaceholderAPI]
 commands:
   # JOBS
   jobs:
-    description: Commande pour voir l'avancement des metiers
+    description: Commande pour voir l'avancement des jobs
     aliases: [j, job]
   addxpjobs:
-    description: Commande pour ajouter de l'exp a un joueur
+    description: Commande pour ajouter de l'exp d'un job a un joueur
     aliases: addxpjob
   setxpjobs:
-    description: Commande pour definir l'exp d'un joueur
+    description: Commande pour definir l'exp d'un job d'un joueur
     aliases: setxpjob
 
   # GUILDS
   guild:
-    description: Domaine pour la plupart des commandes de guilds
+    description: Domaine pour les commandes de guilds
     aliases: g
+
+  # GENERAL XP
+  addxp:
+    description: Command pour ajouter de l'exp a un joueur
+  setxp:
+    description: Commande pour definir l'exp d'un joueur
