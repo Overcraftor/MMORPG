@@ -31,18 +31,24 @@ public class PlayerJoin implements Listener {
             GeneralXpSQL.insert(p.getUniqueId(), 0);
             Main.getInstance().generalXp.put(p, 0);
         }
+
+        //SCOREBOARD
+        Main.getInstance().getScoreboardManager().addPlayer(p);
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent e){
         final Player p = e.getPlayer();
 
+        //JOBS
         JobsSQL.setAllXp(Main.jobsXp.get(p), p.getUniqueId());
         Main.jobsXp.remove(p);
-        Main.getInstance().getLogger().info("L'xp des jobs du joueur " + p.getName() + " a bien ete sauvegarde sur MYSQL");
 
+        //GENERAL XP
         GeneralXpSQL.setXp(p.getUniqueId(), Main.getInstance().generalXp.get(p));
         Main.getInstance().generalXp.remove(p);
-        Main.getInstance().getLogger().info("L'xp general du joueur " + p.getName() + " a bien ete sauvegarde sur MYSQL");
+
+        //SCOREBOARD
+        Main.getInstance().getScoreboardManager().removePlayer(p);
     }
 }

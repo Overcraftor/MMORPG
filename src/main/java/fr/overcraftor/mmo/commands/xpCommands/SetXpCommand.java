@@ -52,6 +52,7 @@ public class SetXpCommand implements CommandExecutor, TabCompleter {
         Main.getInstance().generalXp.put(target, xp);
         GeneralXpSQL.setXp(target.getUniqueId(), xp);
         sender.sendMessage("§aVous avez défini l'xp de §e" + target.getName() + " §aà §6" + xp);
+        Main.getInstance().getScoreboardManager().getScoreboard(target).refreshGeneralLevel();
 
         return true;
     }

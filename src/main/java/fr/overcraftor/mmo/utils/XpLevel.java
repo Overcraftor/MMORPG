@@ -4,6 +4,7 @@ public class XpLevel {
 
     private final int xpRemain;
     private final int level;
+    private final int xpNeed;
 
     public XpLevel(int totalXp) {
         int xpRemain = totalXp;
@@ -12,16 +13,21 @@ public class XpLevel {
 
         while(xpRemain >= xpNeed){
             xpRemain -= xpNeed;
-            xpNeed *= 2;
+            xpNeed *= 1.05;
             level++;
         }
 
         this.xpRemain = xpRemain;
         this.level = level;
+        this.xpNeed = xpNeed;
     }
 
     public int getXpRemain() {
         return xpRemain;
+    }
+
+    public int getXpNeed() {
+        return xpNeed;
     }
 
     public int getLevel() {

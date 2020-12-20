@@ -13,6 +13,7 @@ import fr.overcraftor.mmo.mysql.JobsSQL;
 import fr.overcraftor.mmo.mysql.SQLConnection;
 import fr.overcraftor.mmo.config.ConfigManager;
 import fr.overcraftor.mmo.config.ConfigurationAPI;
+import fr.overcraftor.mmo.scoreboard.MMOScoreboardManager;
 import fr.overcraftor.mmo.timers.XpSaveTimer;
 import fr.overcraftor.mmo.utils.jobs.JobsNames;
 import org.bukkit.Bukkit;
@@ -31,12 +32,15 @@ public class Main extends JavaPlugin {
 
     public static final HashMap<Player, HashMap<JobsNames, Integer>> jobsXp = new HashMap<>();
     public final HashMap<Player, Integer> generalXp = new HashMap<>();
+    private MMOScoreboardManager scoreboardManager;
 
     @Override
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "===================================================================");
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Chargement du plugin" + ChatColor.GOLD + "[" + getName() + "]");
+
         instance = this;
+        scoreboardManager = new MMOScoreboardManager();
 
         ConfigManager.init();
 
@@ -124,8 +128,10 @@ public class Main extends JavaPlugin {
     public SQLConnection getSql() {
         return sql;
     }
-
     public static Main getInstance() {
         return instance;
+    }
+    public MMOScoreboardManager getScoreboardManager() {
+        return scoreboardManager;
     }
 }

@@ -1,5 +1,6 @@
 package fr.overcraftor.mmo.commands.guildcommands;
 
+import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.GuildSQL;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
@@ -20,6 +21,7 @@ public class GQuitCommand {
 
         GuildSQL.removePlayer(p.getUniqueId());
         p.sendMessage("§aVous avez bien quitté votre guild !");
+        Main.getInstance().getScoreboardManager().getScoreboard(p).setGuild("Aucune guilde");
     }
 
 }

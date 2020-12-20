@@ -1,5 +1,6 @@
 package fr.overcraftor.mmo.commands.guildcommands;
 
+import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.GuildSQL;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
@@ -14,6 +15,7 @@ public class GDisbandCommand {
             }else{
                 GuildSQL.delete(p.getUniqueId());
                 p.sendMessage("§aVotre guild a bien été supprimée");
+                Main.getInstance().getScoreboardManager().getScoreboard(p).setGuild("Aucune guilde");
             }
         }else{
             p.sendMessage("§cTu n'es le chef d'aucune guild !");

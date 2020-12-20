@@ -1,5 +1,6 @@
 package fr.overcraftor.mmo.commands.guildcommands;
 
+import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.GuildSQL;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
@@ -27,5 +28,6 @@ public class GJoinCommand {
 
         GuildSQL.addPlayer(guildName, p.getUniqueId());
         p.sendMessage("§aVous avez bien rejoint la guild: §6" + guildName);
+        Main.getInstance().getScoreboardManager().getScoreboard(p).setGuild(guildName);
     }
 }

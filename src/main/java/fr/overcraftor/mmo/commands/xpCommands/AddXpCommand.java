@@ -54,6 +54,7 @@ public class AddXpCommand implements CommandExecutor, TabCompleter {
 
         Main.getInstance().generalXp.put(target, Main.getInstance().generalXp.get(target) + xp);
         target.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§a+§2[§a" + xp + " XP§2]"));
+        Main.getInstance().getScoreboardManager().getScoreboard(target).refreshGeneralLevel();
 
         return true;
     }

@@ -115,7 +115,7 @@ public class GuildSQL {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return "Aucune guilde";
     }
 
     public static List<Guild> getAllGuilds(){
