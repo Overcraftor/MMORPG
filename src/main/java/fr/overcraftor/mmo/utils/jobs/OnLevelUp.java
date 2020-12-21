@@ -12,7 +12,7 @@ public class OnLevelUp {
     public OnLevelUp(Player p, JobsNames job, JobsLevel level){
         if(level == null) return;
 
-        final YamlConfiguration config = ConfigManager.levelUpJop;
+        final YamlConfiguration config = ConfigManager.levelUpJopConfig;
         final List<String> commands = config.getStringList(job.toName().replace("û", "u") + "." + level.getLevel());
 
         if(commands.size() != 0){

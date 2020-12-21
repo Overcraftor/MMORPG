@@ -1,0 +1,8 @@
+Global:
+  - "addapt {user} 1"
+  - "msg {user} Vous venez de monter Level {level}"
+5:
+  - "lp user {user} parent add Level5"
+  - "msg {user} Vous avez débloqué un truc !"
+20:
+  - "msg {user} Plus que 80 Level avant le niveau Maximal !"

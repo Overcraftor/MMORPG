@@ -2,7 +2,7 @@ package fr.overcraftor.mmo.scoreboard;
 
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.GuildSQL;
-import fr.overcraftor.mmo.utils.XpLevel;
+import fr.overcraftor.mmo.utils.generalXp.XpLevel;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

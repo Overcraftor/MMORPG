@@ -3,21 +3,13 @@ plugins {
 }
 
 group 'fr.overcraftor.mmo'
-version '1.3'
+version '1.3.1'
 compileJava.options.encoding = 'UTF-8'
 
 repositories {
     mavenCentral() // This is needed for dependencies.
     mavenLocal() // This is needed for CraftBukkit and Spigot.
-    /*
-    As Spigot-API depends on the Bungeecord ChatComponent-API,
-   we need to add the Sonatype OSS repository, as Gradle,
-   in comparison to maven, doesn't want to understand the ~/.m2
-   directory unless added using mavenLocal(). Maven usually just gets
-   it from there, as most people have run the BuildTools at least once.
-   This is therefore not needed if you're using the full Spigot/CraftBukkit,
-   or if you're using the Bukkit API.
-   */
+
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/' } //PLACE HOLDER DEPENDENCIES
 }

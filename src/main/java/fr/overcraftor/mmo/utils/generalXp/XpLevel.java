@@ -1,4 +1,4 @@
-package fr.overcraftor.mmo.utils;
+package fr.overcraftor.mmo.utils.generalXp;
 
 public class XpLevel {
 

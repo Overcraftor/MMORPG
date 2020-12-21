@@ -10,7 +10,8 @@ import java.util.List;
 public class ConfigManager {
 
     public static final HashMap<String, List<String>> blockBreak = new HashMap<>();
-    public static YamlConfiguration levelUpJop;
+    public static YamlConfiguration levelUpJopConfig;
+    public static YamlConfiguration levelUpConfig;
 
     public static void init(){
         Main.getInstance().getLogger().info("Lecture des fichiers yaml...");
@@ -27,9 +28,15 @@ public class ConfigManager {
             }
         });
 
-        final ConfigurationAPI levelUp = new ConfigurationAPI("job_level_up.yml", Main.getInstance());
+        //----------------------- LEVEL JOB UP --------------------------//
+        final ConfigurationAPI levelUpJob = new ConfigurationAPI("job_level_up.yml", Main.getInstance());
+        levelUpJob.create();
+        levelUpJopConfig = levelUpJob.get();
+
+        //----------------------- LEVEL JOB GENERAL --------------------------//
+        final ConfigurationAPI levelUp = new ConfigurationAPI("level_up.yml", Main.getInstance());
         levelUp.create();
-        levelUpJop = levelUp.get();
+        levelUpConfig = levelUp.get();
 
         Main.getInstance().getLogger().info("Lecture des fichiers yaml fini !");
     }

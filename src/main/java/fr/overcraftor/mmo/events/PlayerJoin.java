@@ -4,6 +4,7 @@ import fr.overcraftor.mmo.mysql.GeneralXpSQL;
 import fr.overcraftor.mmo.utils.jobs.JobsNames;
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.JobsSQL;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +18,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         final Player p = e.getPlayer();
+        Main.getInstance().getServer().dispatchCommand(Bukkit.getConsoleSender(), "spawnpoint " + p.getName() + " 10100 82 10157");
 
         //JOBS XP
         JobsSQL.checkTableContainUUID(p.getUniqueId());

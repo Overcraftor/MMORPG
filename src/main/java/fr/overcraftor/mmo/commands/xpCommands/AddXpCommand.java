@@ -1,6 +1,7 @@
 package fr.overcraftor.mmo.commands.xpCommands;
 
 import fr.overcraftor.mmo.Main;
+import fr.overcraftor.mmo.utils.generalXp.LevelUp;
 import fr.overcraftor.mmo.utils.Permissions;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -52,7 +53,10 @@ public class AddXpCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        Main.getInstance().generalXp.put(target, Main.getInstance().generalXp.get(target) + xp);
+        final int xpBefore = Main.getInstance().generalXp.get(target);
+        LevelUp.checkLevelUp(xpBefore, xpBefore + xp, target);
+
+        Main.getInstance().generalXp.put(target, xpBefore + xp);
         target.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§a+§2[§a" + xp + " XP§2]"));
         Main.getInstance().getScoreboardManager().getScoreboard(target).refreshGeneralLevel();
 
