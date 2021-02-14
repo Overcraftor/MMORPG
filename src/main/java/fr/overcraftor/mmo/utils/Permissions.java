@@ -7,11 +7,19 @@ public enum Permissions {
 
     BREAK_BLOCK("monstermmo.break."),
     PREMIUM("monstermmo.premium"),
+    APT_COMMAND("mmo.admin"),
+
     JOB_SET_XP("monstermmo.jobs.addxp"),
     JOB_ADD_XP("monstermmo.jobs.setxp"),
     JOB_VIEW_OTHER("monstermmo.jobs.viewother"),
+
     ADD_XP("monstermmo.addxp"),
-    SET_XP("monstermmo.setxp");
+    SET_XP("monstermmo.setxp"),
+
+    ADD_MAX_MANA("monstermmo.addmaxmana"),
+    SET_MAX_MANA("monstermmo.setmaxmana"),
+    ADD_MANA("monstermmo.addmana"),
+    SET_MANA("monstermmo.setmana");
 
     private final String permValue;
 

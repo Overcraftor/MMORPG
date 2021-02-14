@@ -2,6 +2,7 @@ package fr.overcraftor.mmo.mysql;
 
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.utils.guilds.Guild;
+import org.bukkit.Bukkit;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class GuildSQL {
+
+    public static final String NO_GUILD = "Aucune guilde";
 
     public static void createTable(){
         try {
@@ -115,7 +118,7 @@ public class GuildSQL {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "Aucune guilde";
+        return NO_GUILD;
     }
 
     public static List<Guild> getAllGuilds(){
@@ -251,6 +254,34 @@ public class GuildSQL {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<String> getPlayersName(String guildName){
+        final List<UUID> playersUUID = getPlayers(guildName);
+        final List<String> players = new ArrayList<>();
+
+        playersUUID.forEach(uuid ->{
+            players.add(Bukkit.getOfflinePlayer(uuid).getName());
+        });
+        return players;
+    }
+
+    public static String getOwner(String guildName){
+
+        try {
+            PreparedStatement sts = Main.getInstance().getSql().getConnection().prepareStatement("SELECT UUIDOwner FROM guilds WHERE name = ?");
+            sts.setString(1, guildName);
+
+            ResultSet rs = sts.executeQuery();
+            if(rs.next()){
+                final UUID UUIDOwner = UUID.fromString(rs.getString("UUIDOwner"));
+                return Bukkit.getOfflinePlayer(UUIDOwner).getName();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public static boolean areInSameGuild(UUID p1, UUID p2){

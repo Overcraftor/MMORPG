@@ -1,0 +1,2 @@
+# cela peut poser des problèmes si un autre plugin vérifie les messages par la suite
+chatWithTextComponent: false

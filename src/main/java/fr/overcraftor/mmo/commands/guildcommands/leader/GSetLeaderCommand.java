@@ -1,4 +1,4 @@
-package fr.overcraftor.mmo.commands.guildcommands;
+package fr.overcraftor.mmo.commands.guildcommands.leader;
 
 import fr.overcraftor.mmo.mysql.GuildSQL;
 import org.bukkit.Bukkit;

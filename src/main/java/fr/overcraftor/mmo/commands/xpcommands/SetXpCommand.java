@@ -1,4 +1,4 @@
-package fr.overcraftor.mmo.commands.xpCommands;
+package fr.overcraftor.mmo.commands.xpcommands;
 
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.GeneralXpSQL;

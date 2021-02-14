@@ -8,7 +8,7 @@ public class XpLevel {
 
     public XpLevel(int totalXp) {
         int xpRemain = totalXp;
-        int xpNeed = 250;
+        int xpNeed = 500;
         int level = 1;
 
         while(xpRemain >= xpNeed){

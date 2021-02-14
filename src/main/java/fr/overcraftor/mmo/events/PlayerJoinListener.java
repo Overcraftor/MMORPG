@@ -1,19 +1,23 @@
 package fr.overcraftor.mmo.events;
 
+import fr.overcraftor.mmo.mysql.AptSQL;
 import fr.overcraftor.mmo.mysql.GeneralXpSQL;
+import fr.overcraftor.mmo.mysql.ManaSQL;
 import fr.overcraftor.mmo.utils.jobs.JobsNames;
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.JobsSQL;
+import fr.overcraftor.mmo.utils.mana.PlayerMana;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 import java.util.HashMap;
 
-public class PlayerJoin implements Listener {
+public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
@@ -34,6 +38,16 @@ public class PlayerJoin implements Listener {
             Main.getInstance().generalXp.put(p, 0);
         }
 
+        //APTITUDE
+        if(!AptSQL.isInTable(p.getUniqueId()))
+            AptSQL.insert(p.getUniqueId(), 0);
+
+        // Mana
+        if(!ManaSQL.isInTable(p.getUniqueId()))
+            ManaSQL.insert(p.getUniqueId());
+
+        PlayerMana.create(p);
+
         //SCOREBOARD
         Main.getInstance().getScoreboardManager().addPlayer(p);
     }
@@ -52,5 +66,10 @@ public class PlayerJoin implements Listener {
 
         //SCOREBOARD
         Main.getInstance().getScoreboardManager().removePlayer(p);
+    }
+
+    @EventHandler
+    public void onRespawn(PlayerRespawnEvent e){
+        PlayerMana.getFromPlayer(e.getPlayer()).respawn();
     }
 }

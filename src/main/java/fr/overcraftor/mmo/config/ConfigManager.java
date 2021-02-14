@@ -12,6 +12,7 @@ public class ConfigManager {
     public static final HashMap<String, List<String>> blockBreak = new HashMap<>();
     public static YamlConfiguration levelUpJopConfig;
     public static YamlConfiguration levelUpConfig;
+    private static YamlConfiguration config;
 
     public static void init(){
         Main.getInstance().getLogger().info("Lecture des fichiers yaml...");
@@ -39,5 +40,14 @@ public class ConfigManager {
         levelUpConfig = levelUp.get();
 
         Main.getInstance().getLogger().info("Lecture des fichiers yaml fini !");
+
+        //-------------------------- CONFIG GENERALE ------------------------//
+        final ConfigurationAPI configApi = new ConfigurationAPI("config.yml", Main.getInstance());
+        configApi.create();
+        config = configApi.get();
+    }
+
+    public static YamlConfiguration getConfig() {
+        return config;
     }
 }

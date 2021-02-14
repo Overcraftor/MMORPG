@@ -1,4 +1,4 @@
-package fr.overcraftor.mmo.commands.xpCommands;
+package fr.overcraftor.mmo.commands.xpcommands;
 
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.utils.generalXp.LevelUp;
@@ -54,9 +54,16 @@ public class AddXpCommand implements CommandExecutor, TabCompleter {
         }
 
         final int xpBefore = Main.getInstance().generalXp.get(target);
-        LevelUp.checkLevelUp(xpBefore, xpBefore + xp, target);
 
-        Main.getInstance().generalXp.put(target, xpBefore + xp);
+        final int i = xpBefore + xp;
+        if(i < 0){
+            Main.getInstance().generalXp.put(target, Integer.MAX_VALUE);
+            return true;
+        }
+
+        LevelUp.checkLevelUp(xpBefore, i, target);
+
+        Main.getInstance().generalXp.put(target, i);
         target.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§a+§2[§a" + xp + " XP§2]"));
         Main.getInstance().getScoreboardManager().getScoreboard(target).refreshGeneralLevel();
 

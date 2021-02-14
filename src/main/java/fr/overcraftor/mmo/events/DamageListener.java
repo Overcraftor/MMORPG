@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class OnDamage implements Listener {
+public class DamageListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e){

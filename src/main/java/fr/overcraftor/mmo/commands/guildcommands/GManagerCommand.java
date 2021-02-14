@@ -1,6 +1,7 @@
 package fr.overcraftor.mmo.commands.guildcommands;
 
 import fr.overcraftor.mmo.Main;
+import fr.overcraftor.mmo.commands.guildcommands.leader.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public class GManagerCommand implements CommandExecutor, TabCompleter {
 
+    private final List<String> cmd = Arrays.asList("create", "join", "settag", "setleader", "disband", "quit", "kick", "list");
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -54,7 +56,18 @@ public class GManagerCommand implements CommandExecutor, TabCompleter {
                     break;
 
                 case "quit":
+                case "q":
                     GQuitCommand.onCommand(p, cmd, label, args);
+                    break;
+
+                case "kick":
+                case "k":
+                    GKickCommand.onCommand(p, cmd, label, args);
+                    break;
+
+                case "list":
+                case "l":
+                    GListCommand.onCommand(p, cmd, label, args);
                     break;
 
                 default:
@@ -71,7 +84,8 @@ public class GManagerCommand implements CommandExecutor, TabCompleter {
         List<String> list = new ArrayList<>();
 
         if(args.length == 1){
-            list.addAll(Arrays.asList("create", "join", "settag", "setleader", "disband", "quit"));
+            this.cmd.stream().filter(command -> command.startsWith(args[0]))
+                    .forEach(list::add);
         }
 
         return list;
