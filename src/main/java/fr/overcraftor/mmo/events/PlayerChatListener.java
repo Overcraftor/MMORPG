@@ -31,8 +31,8 @@ public class PlayerChatListener implements Listener {
             // TEXT COMPONENT
             final TextComponent msg = new TextComponent(formatWithPlaceHolders);
             msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                    new ComponentBuilder("§7" + level.getLevel())
-                            .append("§eXp: §7" + level.getXpRemain() + "§r / §7" + level.getXpNeed())
+                    new ComponentBuilder("§eLevel: §7" + level.getLevel())
+                            .append("\n§eXp: §7" + level.getXpRemain() + "§r / §7" + level.getXpNeed())
                             .append("\n§eGuild: §7" + guildName)
                             .create()));
 

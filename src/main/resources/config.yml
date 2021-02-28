@@ -1,2 +1,14 @@
 # cela peut poser des problèmes si un autre plugin vérifie les messages par la suite
 chatWithTextComponent: false
+
+# SORTS
+traveller: "§a§lSort du Voyageur !"
+charge: "§c§lSort de Charge !"
+damage: "§5§lSort de Zone de Dégât"
+heal: "§d§lSort de Soin de Zone"
+fireball: "§c§lSort de Boule de Feu"
+stamina: "§e§lEndurance"
+magic-armor: "§5§lArmure Magique"
+bersek: "§c§lBerserk"
+golem-invocation: "§b§lInvocation"
+expulsion: "§a§lExpulsion"

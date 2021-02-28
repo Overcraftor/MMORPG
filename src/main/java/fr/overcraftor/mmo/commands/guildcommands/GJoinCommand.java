@@ -2,6 +2,7 @@ package fr.overcraftor.mmo.commands.guildcommands;
 
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.GuildSQL;
+import fr.overcraftor.mmo.utils.Invitation;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
@@ -26,8 +27,14 @@ public class GJoinCommand {
             return;
         }
 
-        GuildSQL.addPlayer(guildName, p.getUniqueId());
-        p.sendMessage("§aVous avez bien rejoint la guild: §6" + guildName);
-        Main.getInstance().getScoreboardManager().getScoreboard(p).setGuild(guildName);
+        if(Main.getInstance().invitations.stream().anyMatch(invitation -> invitation.isInvited(p.getUniqueId(), guildName))){
+            GuildSQL.addPlayer(guildName, p.getUniqueId());
+            p.sendMessage("§aVous avez bien rejoint la guild: §6" + guildName);
+            Main.getInstance().getScoreboardManager().getScoreboard(p).setGuild(guildName);
+            Invitation.remove(p.getUniqueId(), guildName);
+        }else{
+            p.sendMessage("§cVous n'êtes pas invité dans cette guild");
+        }
+
     }
 }

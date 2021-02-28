@@ -42,7 +42,7 @@ public class AddManaCommand implements CommandExecutor {
         }
 
         PlayerMana.getFromPlayer(target).addMana(mana);
-        sender.sendMessage("§aVous avez bien ajouté " + mana + " max mana à " + target.getName());
+        sender.sendMessage("§aVous avez bien ajouté " + mana + " mana à " + target.getName());
 
         return true;
     }

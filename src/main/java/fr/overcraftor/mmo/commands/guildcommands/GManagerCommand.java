@@ -24,7 +24,7 @@ public class GManagerCommand implements CommandExecutor, TabCompleter {
         final Player p = (Player) sender;
 
         if(args.length == 0){
-            p.sendMessage("§c/guild <§ecreate§7/§edisband§7/§ejoin§7/§esetleader§7/§esettag§7/§equit§c>");
+            p.sendMessage("§c/guild <§ecreate§7/§edisband§7/§ejoin§7/§esetleader§7/§esettag§7/§equit§7/§ekick§7/§elist§7/§einvite§c>");
             return true;
         }
 
@@ -70,8 +70,13 @@ public class GManagerCommand implements CommandExecutor, TabCompleter {
                     GListCommand.onCommand(p, cmd, label, args);
                     break;
 
+                case "invite":
+                case "i":
+                    GInviteCommand.onCommand(p, cmd, label, args);
+                    break;
+
                 default:
-                    p.sendMessage("§c/guild <§ecreate§7/§edisband§7/§ejoin§7/§esetleader§7/§esettag§c>");
+                    p.sendMessage("§c/guild <§ecreate§7/§edisband§7/§ejoin§7/§esetleader§7/§esettag§7/§equit§7/§ekick§7/§elist§7/§einvite§c>");
                     break;
             }
         });

@@ -50,8 +50,12 @@ public class PlayerMana extends BukkitRunnable {
         updateBarXp();
     }
 
-    public void removeMana(int mana){
+    public boolean removeMana(int mana){
+        if(this.mana - mana < 0){
+            return false;
+        }
         setMana(this.mana - mana);
+        return true;
     }
 
     public void addMana(int mana){

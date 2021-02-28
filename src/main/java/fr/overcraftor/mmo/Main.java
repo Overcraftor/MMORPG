@@ -17,28 +17,36 @@ import fr.overcraftor.mmo.mysql.*;
 import fr.overcraftor.mmo.config.ConfigManager;
 import fr.overcraftor.mmo.config.ConfigurationAPI;
 import fr.overcraftor.mmo.scoreboard.MMOScoreboardManager;
+import fr.overcraftor.mmo.spells.managers.SpellManager;
 import fr.overcraftor.mmo.timers.XpSaveTimer;
+import fr.overcraftor.mmo.utils.Invitation;
 import fr.overcraftor.mmo.utils.jobs.JobsNames;
 import fr.overcraftor.mmo.utils.mana.PlayerMana;
+import net.minecraft.server.v1_14_R1.EntityGolem;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main extends JavaPlugin {
 
     private SQLConnection sql;
+    private SpellManager spellManager;
     private static Main instance;
 
     public static final HashMap<Player, HashMap<JobsNames, Integer>> jobsXp = new HashMap<>();
     public final HashMap<Player, Integer> generalXp = new HashMap<>();
     public final HashMap<Player, PlayerMana> playerMana = new HashMap<>();
+    public final HashMap<Player, List<EntityGolem>> customGolems = new HashMap<>();
 
     private MMOScoreboardManager scoreboardManager;
+    public final ArrayList<Invitation> invitations = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -46,8 +54,6 @@ public class Main extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Chargement du plugin" + ChatColor.GOLD + "[" + getName() + "]");
 
         instance = this;
-        scoreboardManager = new MMOScoreboardManager();
-
         ConfigManager.init();
 
         getLogger().info("Chargement de la bdd mysql...");
@@ -64,6 +70,9 @@ public class Main extends JavaPlugin {
             final long fiveMn = 5 * 60 * 20L;
             new XpSaveTimer().runTaskTimer(this, fiveMn, fiveMn);
         }
+
+        scoreboardManager = new MMOScoreboardManager();
+        spellManager = new SpellManager();
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "===================================================================");
     }
@@ -110,6 +119,8 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
         getServer().getPluginManager().registerEvents(new DamageListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerChatListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
+        getServer().getPluginManager().registerEvents(new FireBallExplodeListener(), this);
 
         // ----------- COMMANDS ----------- //
         // jobs
@@ -154,5 +165,8 @@ public class Main extends JavaPlugin {
     }
     public MMOScoreboardManager getScoreboardManager() {
         return scoreboardManager;
+    }
+    public SpellManager getSpellManager() {
+        return spellManager;
     }
 }

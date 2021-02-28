@@ -11,11 +11,11 @@ public class BlockBreakListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
-        final String blockType = e.getBlock().getType().toString();
-        if(ConfigManager.blockBreak.containsKey(blockType.toLowerCase())){
+        final String blockType = e.getBlock().getType().toString().toLowerCase();
+        if(ConfigManager.blockBreak.containsKey(blockType)){
 
-            if(e.getPlayer().hasPermission(Permissions.BREAK_BLOCK.get() + blockType.toLowerCase())){
-                ConfigManager.blockBreak.get(blockType.toLowerCase()).forEach(command -> {
+            if(e.getPlayer().hasPermission(Permissions.BREAK_BLOCK.get() + blockType)){
+                ConfigManager.blockBreak.get(blockType).forEach(command -> {
                     Main.getInstance().getServer().dispatchCommand(Main.getInstance().getServer().getConsoleSender(),
                             command.replace("{user}", e.getPlayer().getName()));
                 });
