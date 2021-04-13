@@ -1,4 +1,0 @@
-# FORMAT:
-diamond_block:
-  - "give {user} minecraft:iron_ingot"
-  - "msg Overcraftor Slt"
