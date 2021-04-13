@@ -24,8 +24,6 @@ public class AptInventory {
         for(int i = 0; i < 27; i++)
             inv.setItem(i, grayGlass);
 
-        //TODO remplacer par les données dans sql (save dans un objet PlayerApitude)
-
         inv.setItem(10, new ItemBuilder(Material.DIAMOND_SWORD, "§c§lForce").setLore(
                 "§cNiveau actuel: " + playerAptitude.getStrength(), " ",
                 "§cForce supplémentaire: "+ playerAptitude.getStrength()*3 +"%", " ", "§7Améliorer cette compétence rajoutera 3%", "§7de dégâts supplémentaires.").addFlag(ItemFlag.HIDE_ATTRIBUTES).toItemStack());
