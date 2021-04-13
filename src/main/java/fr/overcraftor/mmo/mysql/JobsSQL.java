@@ -24,7 +24,7 @@ public class JobsSQL {
                                                                 "blacksmithExp INT NOT NULL)");
             sts.execute();
             sts.close();
-            main.getLogger().info("La table pour les metiers est correctement cree (sauf si elle l'etait deja)");
+            main.getLogger().info("job table loaded successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }

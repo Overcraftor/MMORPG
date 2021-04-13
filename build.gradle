@@ -5,8 +5,8 @@ plugins {
 group 'fr.overcraftor.mmo'
 version '2.0-SNAPSHOT'
 compileJava.options.encoding = 'UTF-8'
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 8
+targetCompatibility = 8
 
 repositories {
     mavenLocal() // This is needed for CraftBukkit and Spigot.

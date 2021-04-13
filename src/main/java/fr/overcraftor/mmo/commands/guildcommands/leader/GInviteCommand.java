@@ -2,7 +2,7 @@ package fr.overcraftor.mmo.commands.guildcommands.leader;
 
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.GuildSQL;
-import fr.overcraftor.mmo.utils.Invitation;
+import fr.overcraftor.mmo.utils.guilds.GuildInvitation;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -35,7 +35,7 @@ public class GInviteCommand {
         if(Main.getInstance().invitations.stream().anyMatch(invitation -> invitation.isInvited(target.getUniqueId(), guildName))){
             p.sendMessage("§cCe joueur est déjà invité dans votre guild");
         }else{
-            new Invitation(target.getUniqueId(), guildName).sendMessage();
+            new GuildInvitation(target.getUniqueId(), guildName).sendMessage();
             p.sendMessage("§aVous avez bien invité le joueur §6" + target.getName() + " §adans votre guild !");
         }
 

@@ -4,6 +4,7 @@ import fr.overcraftor.mmo.mysql.AptSQL;
 import fr.overcraftor.mmo.mysql.GeneralXpSQL;
 import fr.overcraftor.mmo.mysql.ManaSQL;
 import fr.overcraftor.mmo.utils.ItemBuilder;
+import fr.overcraftor.mmo.utils.aptitude.PlayerAptitude;
 import fr.overcraftor.mmo.utils.jobs.JobsNames;
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.JobsSQL;
@@ -42,16 +43,23 @@ public class PlayerJoinListener implements Listener {
 
         //APTITUDE
         if(!AptSQL.isInTable(p.getUniqueId()))
-            AptSQL.insert(p.getUniqueId(), 0);
+            AptSQL.insert(p.getUniqueId());
 
         // Mana
         if(!ManaSQL.isInTable(p.getUniqueId()))
             ManaSQL.insert(p.getUniqueId());
 
+        PlayerAptitude playerAptitude = new PlayerAptitude(p);
         PlayerMana.create(p);
 
         //SCOREBOARD
         Main.getInstance().getScoreboardManager().addPlayer(p);
+
+        p.setHealthScale(p.getHealthScale() + (playerAptitude.getHealth() * 2 * 0.25) - 0.5);
+        p.setMaxHealth(p.getMaxHealth() + (playerAptitude.getHealth() * 2 * 0.25) - 0.5);
+
+        final float multiplicator = (float) playerAptitude.getSpeed() * 3.0f / 100.0f + 1.0f;
+        p.setWalkSpeed(0.2f * multiplicator);
     }
 
     @EventHandler

@@ -22,8 +22,10 @@ public class SQLConnection {
 
     public void connect() throws SQLException{
         if(!isConnected()) {
+            long ping = System.currentTimeMillis();
             connection = DriverManager.getConnection(urlbase + host + "/" + database, user, pass);
-            Main.getInstance().getLogger().info("MYSQL: CONNECTED");
+            ping = System.currentTimeMillis() - ping;
+            Main.getInstance().getLogger().info("MYSQL: CONNECTED (ping: " + ping  + "ms)");
         }
     }
 

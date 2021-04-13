@@ -2,6 +2,7 @@ package fr.overcraftor.mmo.commands.aptitudescommands;
 
 import fr.overcraftor.mmo.mysql.AptSQL;
 import fr.overcraftor.mmo.utils.Permissions;
+import fr.overcraftor.mmo.utils.aptitude.PlayerAptitude;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -15,7 +16,7 @@ public class AddAptCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(!Permissions.APT_COMMAND.hasPerm(sender)){
+        if(!Permissions.ADMIN.hasPerm(sender)){
             sender.sendMessage("§cVous n'avez pas la permission !");
             return true;
         }
@@ -45,7 +46,7 @@ public class AddAptCommand implements CommandExecutor {
             return true;
         }
 
-        AptSQL.addApt(target.getUniqueId(), apt);
+        PlayerAptitude.getFromPlayer(target).setApt(PlayerAptitude.getFromPlayer(target).getApt() + apt);
         sender.sendMessage("Vous avez bien ajouté " + apt + " aptitude à " + target.getName());
 
         return true;

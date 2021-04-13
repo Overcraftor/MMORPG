@@ -25,7 +25,7 @@ public class GuildSQL {
                     "name VARCHAR(10) NOT NULL)");
             sts.execute();
             sts.close();
-            Main.getInstance().getLogger().info("La table pour les guilds est correctement cree (sauf si elle l'etait deja)");
+            Main.getInstance().getLogger().info("guild table loaded successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }

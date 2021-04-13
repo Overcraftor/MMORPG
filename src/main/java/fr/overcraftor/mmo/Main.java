@@ -1,17 +1,11 @@
 package fr.overcraftor.mmo;
 
-import fr.overcraftor.mmo.commands.aptitudescommands.AddAptCommand;
-import fr.overcraftor.mmo.commands.aptitudescommands.SetAptCommand;
-import fr.overcraftor.mmo.commands.guildcommands.GManagerCommand;
-import fr.overcraftor.mmo.commands.jobscommands.AddXpJobCommand;
-import fr.overcraftor.mmo.commands.jobscommands.JobCommand;
-import fr.overcraftor.mmo.commands.jobscommands.SetXpJobCommand;
-import fr.overcraftor.mmo.commands.manacommands.AddManaCommand;
-import fr.overcraftor.mmo.commands.manacommands.AddMaxManaCommand;
-import fr.overcraftor.mmo.commands.manacommands.SetManaCommand;
-import fr.overcraftor.mmo.commands.manacommands.SetMaxManaCommand;
-import fr.overcraftor.mmo.commands.xpcommands.AddXpCommand;
-import fr.overcraftor.mmo.commands.xpcommands.SetXpCommand;
+import fr.overcraftor.mmo.commands.aptitudescommands.*;
+import fr.overcraftor.mmo.commands.guildcommands.*;
+import fr.overcraftor.mmo.commands.jobscommands.*;
+import fr.overcraftor.mmo.commands.manacommands.*;
+import fr.overcraftor.mmo.commands.xpcommands.*;
+import fr.overcraftor.mmo.commands.*;
 import fr.overcraftor.mmo.events.*;
 import fr.overcraftor.mmo.mysql.*;
 import fr.overcraftor.mmo.config.ConfigManager;
@@ -19,7 +13,7 @@ import fr.overcraftor.mmo.config.ConfigurationAPI;
 import fr.overcraftor.mmo.scoreboard.MMOScoreboardManager;
 import fr.overcraftor.mmo.spells.managers.SpellManager;
 import fr.overcraftor.mmo.timers.XpSaveTimer;
-import fr.overcraftor.mmo.utils.Invitation;
+import fr.overcraftor.mmo.utils.guilds.GuildInvitation;
 import fr.overcraftor.mmo.utils.jobs.JobsNames;
 import fr.overcraftor.mmo.utils.mana.PlayerMana;
 import net.minecraft.server.v1_14_R1.EntityGolem;
@@ -46,7 +40,7 @@ public class Main extends JavaPlugin {
     public final HashMap<Player, List<EntityGolem>> customGolems = new HashMap<>();
 
     private MMOScoreboardManager scoreboardManager;
-    public final ArrayList<Invitation> invitations = new ArrayList<>();
+    public final ArrayList<GuildInvitation> invitations = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -56,7 +50,7 @@ public class Main extends JavaPlugin {
         instance = this;
         ConfigManager.init();
 
-        getLogger().info("Chargement de la bdd mysql...");
+        getLogger().info("Loading MYSQL database...");
         if(dataConnection()){
             JobsSQL.createTable(this);
             GuildSQL.createTable();
@@ -64,7 +58,7 @@ public class Main extends JavaPlugin {
             AptSQL.createTable();
             ManaSQL.createTable();
 
-            getLogger().info("MYSQL: Correctement initialise");
+            getLogger().info("MYSQL: Correctly initialized");
             registration();
 
             final long fiveMn = 5 * 60 * 20L;
@@ -138,12 +132,15 @@ public class Main extends JavaPlugin {
         // aptitudes
         getCommand("addaptitude").setExecutor(new AddAptCommand());
         getCommand("setaptitude").setExecutor(new SetAptCommand());
+        getCommand("competance").setExecutor(new AptCommand());
 
         //mana
         getCommand("addmaxmana").setExecutor(new AddMaxManaCommand());
         getCommand("setmaxmana").setExecutor(new SetMaxManaCommand());
         getCommand("addmana").setExecutor(new AddManaCommand());
         getCommand("setmana").setExecutor(new SetManaCommand());
+
+        getCommand("mmo").setExecutor(new MMOResetCommand());
 
         // ------------ TAB COMPLETER ------------ //
         getCommand("jobs").setTabCompleter(new JobCommand());

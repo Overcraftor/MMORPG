@@ -2,6 +2,7 @@ package fr.overcraftor.mmo.events;
 
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.GuildSQL;
+import fr.overcraftor.mmo.utils.aptitude.PlayerAptitude;
 import net.minecraft.server.v1_14_R1.EntityGolem;
 import net.minecraft.server.v1_14_R1.EntityLiving;
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftEntity;
@@ -18,9 +19,16 @@ public class DamageListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e){
+        // guilds
         if(e.getDamager() instanceof Player && e.getEntity() instanceof Player){
             if(GuildSQL.areInSameGuild(e.getDamager().getUniqueId(), e.getEntity().getUniqueId()))
                 e.setCancelled(true);
+        }
+
+        // aptitudes DAMAGE
+        if(e.getDamager() instanceof Player){
+            final double multiplicator = (PlayerAptitude.getFromPlayer((Player) e.getDamager()).getStrength() * 3.0 / 100.0) + 1;
+            e.setDamage(e.getDamage() * multiplicator);
         }
 
         // ------------- CUSTOM GOLEM ------------ //

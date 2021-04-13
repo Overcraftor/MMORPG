@@ -1,4 +1,4 @@
-package fr.overcraftor.mmo.utils;
+package fr.overcraftor.mmo.utils.guilds;
 
 import fr.overcraftor.mmo.Main;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -11,12 +11,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
 
-public class Invitation extends BukkitRunnable {
+public class GuildInvitation extends BukkitRunnable {
 
     private final UUID receiver;
     private final String guildName;
 
-    public Invitation(UUID receiver, String guildName) {
+    public GuildInvitation(UUID receiver, String guildName) {
         this.receiver = receiver;
         this.guildName = guildName;
         super.runTaskLater(Main.getInstance(), 20 * 60 * 2); //2 minutes
@@ -47,7 +47,7 @@ public class Invitation extends BukkitRunnable {
     }
 
     public static void remove(UUID receiver, String guildName){
-        final Invitation invitation = Main.getInstance().invitations.stream().filter(inv -> inv.isInvited(receiver, guildName)).findFirst().get();
+        final GuildInvitation invitation = Main.getInstance().invitations.stream().filter(inv -> inv.isInvited(receiver, guildName)).findFirst().get();
         Main.getInstance().invitations.remove(invitation);
     }
 }

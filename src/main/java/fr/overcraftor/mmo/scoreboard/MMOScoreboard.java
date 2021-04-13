@@ -74,7 +74,7 @@ public class MMOScoreboard {
         this.guild = guild2.getEntry();
     }
 
-    public void refreshGeneralLevel(){
+    public MMOScoreboard refreshGeneralLevel(){
         final XpLevel xpLevel = new XpLevel(Main.getInstance().generalXp.get(p));
 
         scoreboard.resetScores(this.level);
@@ -86,6 +86,7 @@ public class MMOScoreboard {
         final Score xp = objective.getScore(this.xp);
         level.setScore(7);
         xp.setScore(4);
+        return this;
     }
 
     public void setGuild(String guildName){

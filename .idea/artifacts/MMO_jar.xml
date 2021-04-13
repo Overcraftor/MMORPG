@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MMO:jar">
+    <output-path>$USER_HOME$/Desktop/Launchers/Developpement/Servers/LocalHost-1.14.4/plugins</output-path>
+    <root id="archive" name="MMO.jar" />
+  </artifact>
+</component>

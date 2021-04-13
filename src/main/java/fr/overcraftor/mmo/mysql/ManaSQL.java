@@ -16,7 +16,7 @@ public class ManaSQL {
                     "MaxManaBonus INT NOT NULL)");
             sts.execute();
             sts.close();
-            Main.getInstance().getLogger().info("La table pour le mana est correctement cree (sauf si elle l'etait deja)");
+            Main.getInstance().getLogger().info("mana table loaded successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }

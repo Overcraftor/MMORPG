@@ -42,6 +42,9 @@ commands:
   setaptitude:
     description: Command pour definir l'aptitude d'un joueur
     aliases: setapt
+  competance:
+    description: Command pour ouvrir le menu des competences
+    aliases: comp
 
   #  MANA
   addmaxmana:
@@ -56,3 +59,7 @@ commands:
   setmana:
     description: Definir le mana  d'un joueur
     aliases: setm
+
+  mmo:
+    description: Commande administrative
+    aliases: mmorpg

@@ -53,10 +53,9 @@ public abstract class Spell {
             Main.getInstance().getSpellManager().putCooldown(p.getUniqueId(), this.itemName);
             run(p.getUniqueId(), this.itemName);
 
-            //message &4&l[&c-(Mana)&4&l] &c(Sort)
             p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§4§l[§c-(" + this.manaCost + ")§4§l] §c(" + this.itemName + ")"));
         }else{
-            p.sendMessage("§cVous n'avez pas asser de mana pour lancer ce sort.");
+            p.sendMessage("§cVous n'avez pas assez de mana pour lancer ce sort.");
         }
     }
 

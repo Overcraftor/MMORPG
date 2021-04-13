@@ -5,9 +5,11 @@ import org.bukkit.entity.Player;
 
 public enum Permissions {
 
+
+    ADMIN("mmo.admin"),
+
     BREAK_BLOCK("monstermmo.break."),
     PREMIUM("monstermmo.premium"),
-    APT_COMMAND("mmo.admin"),
 
     JOB_SET_XP("monstermmo.jobs.addxp"),
     JOB_ADD_XP("monstermmo.jobs.setxp"),
@@ -30,10 +32,28 @@ public enum Permissions {
     public String get() {
         return permValue;
     }
+
     public boolean hasPerm(Player p){
         return p.hasPermission(permValue);
     }
+
+    public boolean hasPermMessage(Player p){
+        boolean perm = hasPerm(p);
+        if(!perm)
+            p.sendMessage("§cVous n'avez pas la permission d'execute cette commande");
+
+        return perm;
+    }
+
     public boolean hasPerm(CommandSender sender){
         return sender.hasPermission(permValue);
+    }
+
+    public boolean hasPermMessage(CommandSender sender){
+        boolean perm = hasPerm(sender);
+        if(!perm)
+            sender.sendMessage("§cVous n'avez pas la permission d'execute cette commande");
+
+        return perm;
     }
 }

@@ -16,7 +16,7 @@ public class GeneralXpSQL {
                     "xp INT NOT NULL)");
             sts.execute();
             sts.close();
-            Main.getInstance().getLogger().info("La table pour l'xp general est correctement cree (sauf si elle l'etait deja)");
+            Main.getInstance().getLogger().info("general xp table loaded successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -15,7 +15,7 @@ public class ConfigManager {
     private static YamlConfiguration config;
 
     public static void init(){
-        Main.getInstance().getLogger().info("Lecture des fichiers yaml...");
+        Main.getInstance().getLogger().info("Reading yaml files...");
 
         //--------------- BLOCK BREAK ------------------ //
         final ConfigurationAPI blockBreak = new ConfigurationAPI("block_break.yml", Main.getInstance());
@@ -39,12 +39,12 @@ public class ConfigManager {
         levelUp.create();
         levelUpConfig = levelUp.get();
 
-        Main.getInstance().getLogger().info("Lecture des fichiers yaml fini !");
-
         //-------------------------- CONFIG GENERALE ------------------------//
         final ConfigurationAPI configApi = new ConfigurationAPI("config.yml", Main.getInstance());
         configApi.create();
         config = configApi.get();
+
+        Main.getInstance().getLogger().info("Yaml files readed successfully !");
     }
 
     public static YamlConfiguration getConfig() {

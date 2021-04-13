@@ -10,7 +10,7 @@ import java.util.List;
 public class PushSpell extends Spell {
 
     public PushSpell() {
-        super(1, "expulsion", 20 * 20);
+        super(6, "expulsion", 20 * 20);
     }
 
     @Override
