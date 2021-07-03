@@ -4,6 +4,7 @@ import fr.overcraftor.mmo.Main;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class ConfigManager {
     public static YamlConfiguration levelUpJopConfig;
     public static YamlConfiguration levelUpConfig;
     private static YamlConfiguration config;
+    public static final List<String> regions = new ArrayList<>();
 
     public static void init(){
         Main.getInstance().getLogger().info("Reading yaml files...");
@@ -43,6 +45,11 @@ public class ConfigManager {
         final ConfigurationAPI configApi = new ConfigurationAPI("config.yml", Main.getInstance());
         configApi.create();
         config = configApi.get();
+
+        //-------------------------- REGIONS ------------------------//
+        final ConfigurationAPI regionConfig = new ConfigurationAPI("region.yml", Main.getInstance());
+        configApi.create();
+        regions.addAll(regionConfig.get().getStringList("regions"));
 
         Main.getInstance().getLogger().info("Yaml files readed successfully !");
     }

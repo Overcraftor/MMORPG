@@ -122,8 +122,9 @@ public class Main extends JavaPlugin {
         getCommand("addxpjobs").setExecutor(new AddXpJobCommand());
         getCommand("setxpjobs").setExecutor(new SetXpJobCommand());
 
-        // guild
+        // others
         getCommand("guild").setExecutor(new GManagerCommand());
+        getCommand("wimr").setExecutor(new WimrCommand());
 
         // general xp
         getCommand("addxp").setExecutor(new AddXpCommand());

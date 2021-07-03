@@ -63,3 +63,6 @@ commands:
   mmo:
     description: Commande administrative
     aliases: mmorpg
+
+  wimr:
+    description: Voir sa region WorldGuard
